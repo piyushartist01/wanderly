@@ -53,7 +53,7 @@
               ${pkg.bestSeller ? '<span class="card-tag best-seller">⭐ Best Seller</span>' : ''}
             </div>
             <h1 class="text-display-lg" style="color:white;margin-bottom:0.5rem">${pkg.title}</h1>
-            <p style="font-size:1.125rem;color:rgba(255,255,255,0.9);display:flex;align-items:center;gap:0.5rem"><script>document.write(icons.mapPin)</script> ${dest.name}, ${dest.country}</p>
+            <p style="font-size:1.125rem;color:rgba(255,255,255,0.9);display:flex;align-items:center;gap:0.5rem">${icons.mapPin} ${dest.name}, ${dest.country}</p>
           </div>
         </div>
       `;
@@ -87,15 +87,15 @@
 
         <div class="grid-2 mb-8">
           <div class="card" style="padding:1.5rem">
-            <h3 class="font-semibold mb-4 text-lagoon flex items-center gap-2"><script>document.write(icons.check)</script> What's Included</h3>
+            <h3 class="font-semibold mb-4 text-lagoon flex items-center gap-2">${icons.check} What's Included</h3>
             <ul class="inclusion-list included">
-              ${pkg.inclusions.map(inc => `<li><script>document.write(icons.check)</script> ${inc}</li>`).join('')}
+              ${pkg.inclusions.map(inc => `<li>${icons.check} ${inc}</li>`).join('')}
             </ul>
           </div>
           <div class="card" style="padding:1.5rem">
-            <h3 class="font-semibold mb-4 text-terracotta flex items-center gap-2"><script>document.write(icons.x)</script> What's Not Included</h3>
+            <h3 class="font-semibold mb-4 text-terracotta flex items-center gap-2">${icons.x} What's Not Included</h3>
             <ul class="inclusion-list excluded">
-              ${pkg.exclusions.map(exc => `<li><script>document.write(icons.x)</script> ${exc}</li>`).join('')}
+              ${pkg.exclusions.map(exc => `<li>${icons.x} ${exc}</li>`).join('')}
             </ul>
           </div>
         </div>
@@ -109,11 +109,11 @@
           
           <div style="margin:1.5rem 0;padding:1rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
             <div class="flex items-center justify-between mb-2">
-              <span class="text-sm text-muted flex items-center gap-2"><script>document.write(icons.clock)</script> Duration</span>
+              <span class="text-sm text-muted flex items-center gap-2">${icons.clock} Duration</span>
               <span class="font-semibold">${pkg.days} Days / ${pkg.nights} Nights</span>
             </div>
             <div class="flex items-center justify-between mb-2">
-              <span class="text-sm text-muted flex items-center gap-2"><script>document.write(icons.users)</script> Group Size</span>
+              <span class="text-sm text-muted flex items-center gap-2">${icons.users} Group Size</span>
               <span class="font-semibold">${pkg.groupSize.min} - ${pkg.groupSize.max} people</span>
             </div>
           </div>
@@ -122,12 +122,12 @@
             Book Now
           </button>
           <button class="btn btn-secondary" style="width:100%;justify-content:center;margin-bottom:1.5rem" onclick="toggleWishlist('${pkg.id}')">
-            <script>document.write(icons.heart)</script> Save to Wishlist
+            ${icons.heart} Save to Wishlist
           </button>
 
-          <div class="trust-row"><script>document.write(icons.shield)</script> Free cancellation up to 15 days</div>
-          <div class="trust-row"><script>document.write(icons.star)</script> Verified reviews only</div>
-          <div class="trust-row"><script>document.write(icons.compass)</script> Expert local guides</div>
+          <div class="trust-row">${icons.shield} Free cancellation up to 15 days</div>
+          <div class="trust-row">${icons.star} Verified reviews only</div>
+          <div class="trust-row">${icons.compass} Expert local guides</div>
         </div>
 
         <div class="sidebar-card">

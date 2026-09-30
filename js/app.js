@@ -350,12 +350,23 @@ function renderDestinationCard(dest) {
   `;
 }
 
+// ===== RENDER INLINE ICONS VIA DATA-ICON =====
+function renderIcons(container = document) {
+  container.querySelectorAll('[data-icon]').forEach(el => {
+    const iconName = el.getAttribute('data-icon');
+    if (icons[iconName]) {
+      el.innerHTML = icons[iconName];
+    }
+  });
+}
+
 // ===== INIT SHARED LAYOUT =====
 function initPage(activePage) {
   initTheme();
   renderNavbar(activePage);
   renderFooter();
   renderMobileTabBar(activePage);
+  renderIcons();
 
   // Check for login success query param
   const urlParams = new URLSearchParams(window.location.search);
