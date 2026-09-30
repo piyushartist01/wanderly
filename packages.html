@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Explore Packages — Wanderly</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="container pt-20 pb-10" style="margin-top: 64px">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 class="text-display-md mb-2">Explore Packages</h1>
+        <p class="text-muted">Curated experiences from ₹4,999 · All-inclusive · Free cancellation</p>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="chip-row mb-6">
+      <button class="chip active" onclick="filterCategory('All', this)">All</button>
+      <button class="chip" onclick="filterCategory('Trekking', this)">Trekking</button>
+      <button class="chip" onclick="filterCategory('Desert Trips', this)">Desert Trips</button>
+      <button class="chip" onclick="filterCategory('Water Adventures', this)">Water Adventures</button>
+      <button class="chip" onclick="filterCategory('Cultural', this)">Cultural</button>
+      <button class="chip" onclick="filterCategory('Beach', this)">Beach</button>
+      <button class="chip" onclick="filterCategory('Nature & Wildlife', this)">Nature & Wildlife</button>
+      <button class="chip" onclick="filterCategory('Cycling', this)">Cycling</button>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid-3" id="packages-grid"></div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    initPage('packages');
+    
+    // Check URL for category
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialCategory = urlParams.get('cat') || 'All';
+    
+    function renderGrid(data) {
+      const grid = document.getElementById('packages-grid');
+      grid.innerHTML = data.map(renderPackageCard).join('');
+    }
+
+    function filterCategory(cat, btnElement) {
+      // Update UI active state
+      document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      if(btnElement) {
+        btnElement.classList.add('active');
+      } else {
+        // Find by text if called on load
+        Array.from(document.querySelectorAll('.chip')).find(el => el.textContent === cat)?.classList.add('active');
+      }
+
+      // Filter data
+      const filtered = cat === 'All' ? packages : packages.filter(p => p.category === cat);
+      renderGrid(filtered);
+    }
+
+    // Initialize
+    filterCategory(initialCategory);
+  </script>
+</body>
+</html>

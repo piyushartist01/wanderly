@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>My Account — Wanderly</title>
+  <meta name="description" content="Manage your bookings, wishlists and profile on Wanderly.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="container pt-20 pb-10" style="margin-top: 64px">
+    
+    <!-- Top Header & Logout -->
+    <div class="flex items-center justify-between mb-8" style="flex-wrap:wrap;gap:16px">
+      <div>
+        <span style="font-family:var(--font-hand);font-size:1.5rem;color:var(--teal)">Explorer Journal</span>
+        <h1 class="text-display-md" style="margin:2px 0 6px">My Account</h1>
+        <p class="text-muted">Manage your bookings, saved trails, and explorer preferences.</p>
+      </div>
+      <div id="auth-header-action">
+        <button type="button" onclick="logoutUser()" class="btn btn-secondary" style="border-radius:999px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Log out
+        </button>
+      </div>
+    </div>
+
+    <!-- Guest Banner if not logged in -->
+    <div id="guest-state-banner" style="display:none" class="card p-6 mb-8" style="background:color-mix(in srgb, var(--gold) 15%, var(--card));border:1.5px solid var(--gold);padding:24px;border-radius:20px">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+        <div>
+          <h3 style="font-size:1.15rem;font-weight:700;margin-bottom:4px">You are currently browsing as a Guest</h3>
+          <p class="text-muted" style="font-size:0.875rem">Sign in to sync your wishlist across devices, save custom itineraries, and view offline boarding passes.</p>
+        </div>
+        <a href="login.html" class="btn btn-primary" style="border-radius:999px">Sign In to Wanderly →</a>
+      </div>
+    </div>
+
+    <div class="layout-detail">
+      <!-- Main Column -->
+      <div>
+        <!-- Profile Card -->
+        <div class="card p-6 mb-8" style="padding:1.75rem;border-radius:24px;border:1px solid var(--line)">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="team-avatar" id="prof-avatar" style="width:72px;height:72px;margin:0;font-size:1.4rem;background:var(--teal)">JD</div>
+            <div>
+              <h2 class="text-display-sm" id="prof-name" style="margin:0 0 4px">Jane Doe</h2>
+              <p class="text-muted" id="prof-email" style="font-size:0.875rem">jane.doe@example.com</p>
+              <span id="prof-role" class="card-tag" style="background:color-mix(in srgb, var(--teal) 15%, var(--card));color:var(--teal);margin-top:6px">Verified Explorer</span>
+            </div>
+          </div>
+
+          <div class="grid-2 mt-6 pt-6" style="border-top:1px solid var(--border)">
+             <div>
+                <p class="text-sm text-muted mb-1">Compass ID</p>
+                <p class="font-semibold" id="prof-phone">WNDR-98421</p>
+             </div>
+             <div>
+                <p class="text-sm text-muted mb-1">Explorer Since</p>
+                <p class="font-semibold" id="prof-since">January 2026</p>
+             </div>
+          </div>
+        </div>
+
+        <!-- Wishlist -->
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <div>
+            <h2 class="text-display-sm">My Saved Wishlist</h2>
+            <p class="text-muted text-xs">Trips and destinations you have flagged for upcoming escapes.</p>
+          </div>
+          <span id="wishlist-counter" class="card-tag" style="background:var(--card);border:1px solid var(--line)">0 saved</span>
+        </div>
+        <div class="grid-2 mb-8" id="wishlist-grid"></div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div>
+        <div class="sidebar-sticky">
+           <!-- Upcoming Trips Card -->
+           <div class="sidebar-card" style="border-radius:20px;border:1px solid var(--line)">
+              <h3 class="font-semibold mb-3 text-lg" style="color:var(--ink)">Upcoming Expeditions</h3>
+              <p class="text-muted text-sm italic mb-4">No active departures booked yet.</p>
+              <div style="background:var(--bg);border-radius:12px;padding:12px;margin-bottom:16px;font-size:0.8125rem">
+                <strong>Next available:</strong> Jaisalmer Dune Safari departs this weekend with 4 spots left.
+              </div>
+              <a href="packages.html" class="btn btn-primary w-full justify-center" style="border-radius:999px">Explore Packages</a>
+           </div>
+
+           <!-- Offline Pack Notice -->
+           <div class="sidebar-card" style="border-radius:20px;border:1px solid var(--line);background:color-mix(in srgb, var(--gold) 8%, var(--card))">
+              <h4 style="font-size:0.9375rem;font-weight:700;margin-bottom:6px">🎒 Offline Travel Pack</h4>
+              <p class="text-muted text-xs" style="line-height:1.5;margin-bottom:12px">
+                Whenever you confirm an adventure, your maps, permits, and day schedules are automatically cached for offline viewing.
+              </p>
+              <a href="support.html" style="font-size:0.8125rem;color:var(--teal);font-weight:700">How offline packs work →</a>
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    initPage('account');
+
+    // Populate user profile
+    const user = getAuthUser();
+    if (user) {
+      document.getElementById('prof-name').textContent = user.name;
+      document.getElementById('prof-email').textContent = user.email;
+      document.getElementById('prof-avatar').textContent = user.avatar || user.name.charAt(0);
+      document.getElementById('prof-since').textContent = user.since || 'October 2026';
+      if (user.role) {
+        document.getElementById('prof-role').textContent = user.role;
+      }
+    } else {
+      document.getElementById('guest-state-banner').style.display = 'block';
+      document.getElementById('auth-header-action').innerHTML = `
+        <a href="login.html" class="btn btn-primary" style="border-radius:999px">Sign In</a>
+      `;
+      document.getElementById('prof-name').textContent = 'Guest Explorer';
+      document.getElementById('prof-email').textContent = 'Sign in to access your cloud profile';
+      document.getElementById('prof-avatar').textContent = 'GE';
+    }
+
+    function renderWishlist() {
+      const grid = document.getElementById('wishlist-grid');
+      const list = getWishlist();
+      document.getElementById('wishlist-counter').textContent = `${list.length} saved`;
+
+      if (list.length === 0) {
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;background:var(--card);border-radius:var(--radius-card);border:1.5px dashed var(--line)"><p class="text-muted" style="margin-bottom:12px">Your saved list is empty.</p><a href="packages.html" class="btn btn-primary" style="border-radius:999px">Explore Packages</a></div>';
+      } else {
+        const items = list.map(id => {
+           let item = packages.find(p => p.id === id);
+           if (item) return renderPackageCard(item);
+           item = destinations.find(d => d.id === id);
+           if (item) return renderDestinationCard(item);
+           return '';
+        });
+        grid.innerHTML = items.join('');
+      }
+    }
+
+    renderWishlist();
+
+    // Override toggleWishlist to refresh grid
+    const origToggle = toggleWishlist;
+    window.toggleWishlist = function(id) {
+       origToggle(id);
+       renderWishlist();
+    };
+  </script>
+</body>
+</html>

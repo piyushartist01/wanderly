@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Help Centre — Wanderly</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .faq-item { border-bottom: 1px solid var(--border); padding: 1.5rem 0; cursor: pointer; }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-question { font-weight: 600; font-size: 1.125rem; display: flex; justify-content: space-between; align-items: center; }
+    .faq-answer { margin-top: 1rem; color: var(--text-muted); display: none; line-height: 1.6; }
+    .faq-item.active .faq-answer { display: block; }
+    .faq-item.active .faq-icon { transform: rotate(180deg); }
+    .faq-icon { transition: transform 0.3s ease; }
+  </style>
+</head>
+<body>
+
+  <div class="container pt-20 pb-10" style="margin-top: 64px; max-width: 800px">
+    <div class="text-center mb-8">
+      <h1 class="text-display-md mb-2">Help Centre</h1>
+      <p class="text-muted">Frequently asked questions and support.</p>
+    </div>
+
+    <!-- Search -->
+    <div class="search-pill mb-8" style="margin: 0 auto 3rem auto; max-width: 100%">
+      <div style="display:flex;align-items:center;flex:1;padding-left:0.5rem">
+        <span style="color:var(--text-muted);width:20px;margin-left:1rem"><script>document.write(icons.search)</script></span>
+        <input type="text" placeholder="Search for answers..." style="width:100%" onkeyup="showToast('Search functionality coming soon!', 'info')">
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="card p-0">
+      <div style="padding:0 2rem">
+        
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+          <div class="faq-question">What is your cancellation policy? <span class="faq-icon"><script>document.write(icons.chevronRight)</script></span></div>
+          <div class="faq-answer">Most of our packages offer free cancellation up to 15 days before the departure date. For cancellations made within 15 days, a tiered fee applies. Please check the specific package details for exact terms.</div>
+        </div>
+
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+          <div class="faq-question">Are flights included in the package price? <span class="faq-icon"><script>document.write(icons.chevronRight)</script></span></div>
+          <div class="faq-answer">No, our base package prices do not include flights to the destination. We believe this gives you the flexibility to book flights using your preferred airline or miles. However, all internal transport during the trip is included.</div>
+        </div>
+
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+          <div class="faq-question">Is travel insurance mandatory? <span class="faq-icon"><script>document.write(icons.chevronRight)</script></span></div>
+          <div class="faq-answer">For trekking and high-altitude trips (like Ladakh or Kedarkantha), comprehensive travel insurance covering medical evacuation is mandatory. For regular cultural or beach trips, it is highly recommended but not mandatory.</div>
+        </div>
+
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+          <div class="faq-question">How do I know if a trek is right for my fitness level? <span class="faq-icon"><script>document.write(icons.chevronRight)</script></span></div>
+          <div class="faq-answer">Every package is tagged with a difficulty rating (Easy, Moderate, Challenging). We also provide a detailed itinerary with altitude and distance metrics. If you're unsure, you can contact our expert guides who will help assess if a trip is right for you.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Contact CTA -->
+    <div class="mt-8 text-center" style="margin-top:4rem">
+      <p class="text-muted mb-4">Still have questions?</p>
+      <a href="contact.html" class="btn btn-secondary">Contact Support</a>
+    </div>
+
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    initPage('support');
+  </script>
+</body>
+</html>

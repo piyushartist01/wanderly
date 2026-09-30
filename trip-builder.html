@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Trip Builder — Wanderly</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .builder-step { display: none; }
+    .builder-step.active { display: block; animation: fadeIn 0.4s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .option-card { border: 2px solid var(--border); border-radius: var(--radius-card); padding: 1.5rem; cursor: pointer; transition: all 0.2s ease; text-align: center; }
+    .option-card:hover { border-color: var(--lagoon); background: rgba(31,122,140,0.05); }
+    .option-card.selected { border-color: var(--lagoon); background: rgba(31,122,140,0.1); box-shadow: 0 0 0 1px var(--lagoon); }
+    .option-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+
+  <div class="container pt-20 pb-10" style="margin-top: 64px; max-width: 800px">
+    
+    <div class="text-center mb-8">
+      <span class="text-hand text-terracotta mb-2" style="font-size:1.5rem;display:block">Craft your journey</span>
+      <h1 class="text-display-md mb-2">Custom Trip Builder</h1>
+      <p class="text-muted">Tell us what you want, and our experts will craft a personalized itinerary.</p>
+    </div>
+
+    <div class="progress-bar mb-8">
+      <div class="progress-step active" id="dot-1"></div>
+      <div class="progress-step" id="dot-2"></div>
+      <div class="progress-step" id="dot-3"></div>
+      <div class="progress-step" id="dot-4"></div>
+    </div>
+
+    <div class="card p-6" style="padding: 2rem">
+      <form id="builder-form" onsubmit="event.preventDefault(); submitForm()">
+        
+        <!-- Step 1: Who -->
+        <div class="builder-step active" id="step-1">
+          <h2 class="text-display-sm mb-6 text-center">Who is traveling?</h2>
+          <div class="grid-2 mb-8">
+            <div class="option-card" onclick="selectOption(this, 'who', 'Solo')">
+              <div class="option-icon">🎒</div>
+              <h3 class="font-semibold">Solo</h3>
+            </div>
+            <div class="option-card" onclick="selectOption(this, 'who', 'Couple')">
+              <div class="option-icon">💑</div>
+              <h3 class="font-semibold">Couple</h3>
+            </div>
+            <div class="option-card" onclick="selectOption(this, 'who', 'Family')">
+              <div class="option-icon">👨‍👩‍👧‍👦</div>
+              <h3 class="font-semibold">Family</h3>
+            </div>
+            <div class="option-card" onclick="selectOption(this, 'who', 'Friends')">
+              <div class="option-icon">🎉</div>
+              <h3 class="font-semibold">Friends Group</h3>
+            </div>
+          </div>
+          <div style="text-align:right">
+            <button type="button" class="btn btn-primary" onclick="nextStep(1)">Next <script>document.write(icons.arrowRight)</script></button>
+          </div>
+        </div>
+
+        <!-- Step 2: Duration -->
+        <div class="builder-step" id="step-2">
+          <h2 class="text-display-sm mb-6 text-center">How long is your trip?</h2>
+          <div class="grid-2 mb-8">
+            <div class="option-card" onclick="selectOption(this, 'duration', 'Weekend')">
+              <div class="option-icon">⏱️</div>
+              <h3 class="font-semibold">Weekend (2-3 days)</h3>
+            </div>
+            <div class="option-card" onclick="selectOption(this, 'duration', 'Short')">
+              <div class="option-icon">📅</div>
+              <h3 class="font-semibold">Short Trip (4-6 days)</h3>
+            </div>
+            <div class="option-card" onclick="selectOption(this, 'duration', 'Week')">
+              <div class="option-icon">🗓️</div>
+              <h3 class="font-semibold">A Week (7-9 days)</h3>
+            </div>
+            <div class="option-card" onclick="selectOption(this, 'duration', 'Long')">
+              <div class="option-icon">🌍</div>
+              <h3 class="font-semibold">Long Journey (10+ days)</h3>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between">
+            <button type="button" class="btn btn-secondary" onclick="prevStep(2)">Back</button>
+            <button type="button" class="btn btn-primary" onclick="nextStep(2)">Next <script>document.write(icons.arrowRight)</script></button>
+          </div>
+        </div>
+
+        <!-- Step 3: Budget -->
+        <div class="builder-step" id="step-3">
+          <h2 class="text-display-sm mb-6 text-center">What's your budget style?</h2>
+          <div class="grid-3 mb-8">
+            <div class="option-card" onclick="selectOption(this, 'budget', 'Backpacker')">
+              <div class="option-icon">🏕️</div>
+              <h3 class="font-semibold">Backpacker</h3>
+              <p class="text-xs text-muted mt-2">Hostels & local food</p>
+            </div>
+            <div class="option-card" onclick="selectOption(this, 'budget', 'Comfort')">
+              <div class="option-icon">🏨</div>
+              <h3 class="font-semibold">Comfort</h3>
+              <p class="text-xs text-muted mt-2">3/4 star hotels</p>
+            </div>
+            <div class="option-card" onclick="selectOption(this, 'budget', 'Luxury')">
+              <div class="option-icon">✨</div>
+              <h3 class="font-semibold">Luxury</h3>
+              <p class="text-xs text-muted mt-2">Premium resorts</p>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between">
+            <button type="button" class="btn btn-secondary" onclick="prevStep(3)">Back</button>
+            <button type="button" class="btn btn-primary" onclick="nextStep(3)">Next <script>document.write(icons.arrowRight)</script></button>
+          </div>
+        </div>
+
+        <!-- Step 4: Details -->
+        <div class="builder-step" id="step-4">
+          <h2 class="text-display-sm mb-6 text-center">Almost done!</h2>
+          <div class="form-group">
+            <label>Any specific destinations in mind?</label>
+            <input type="text" class="form-input" placeholder="e.g. Kerala, Ladakh, or 'Anywhere with beaches'">
+          </div>
+          <div class="form-group">
+            <label>Additional notes or requirements?</label>
+            <textarea class="form-input" placeholder="e.g. Need vegetarian food, traveling with a pet..."></textarea>
+          </div>
+          <div class="grid-2 gap-4 mb-8">
+            <div class="form-group mb-0">
+              <label>Name</label>
+              <input type="text" class="form-input" required>
+            </div>
+            <div class="form-group mb-0">
+              <label>Email</label>
+              <input type="email" class="form-input" required>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between">
+            <button type="button" class="btn btn-secondary" onclick="prevStep(4)">Back</button>
+            <button type="submit" class="btn btn-primary">Submit Request</button>
+          </div>
+        </div>
+
+        <!-- Success -->
+        <div class="builder-step text-center py-8" id="step-success">
+          <div style="width:80px;height:80px;background:var(--lagoon);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 2rem auto">
+            <script>document.write(icons.check)</script>
+          </div>
+          <h2 class="text-display-sm mb-4">Request Received!</h2>
+          <p class="text-muted mb-8">Our travel experts are reviewing your preferences and will get back to you with a custom itinerary within 24 hours.</p>
+          <a href="index.html" class="btn btn-secondary">Back to Home</a>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    initPage('trip-builder');
+
+    const formData = {};
+
+    function selectOption(el, category, value) {
+      // Remove selected from siblings
+      const siblings = el.parentElement.children;
+      for (let i = 0; i < siblings.length; i++) {
+        siblings[i].classList.remove('selected');
+      }
+      // Add to clicked
+      el.classList.add('selected');
+      formData[category] = value;
+    }
+
+    function nextStep(current) {
+      // Validate
+      if (current === 1 && !formData.who) return showToast('Please select who is traveling', 'error');
+      if (current === 2 && !formData.duration) return showToast('Please select a duration', 'error');
+      if (current === 3 && !formData.budget) return showToast('Please select a budget style', 'error');
+
+      document.getElementById('step-' + current).classList.remove('active');
+      document.getElementById('step-' + (current + 1)).classList.add('active');
+      document.getElementById('dot-' + (current + 1)).classList.add('active');
+    }
+
+    function prevStep(current) {
+      document.getElementById('step-' + current).classList.remove('active');
+      document.getElementById('step-' + (current - 1)).classList.add('active');
+      document.getElementById('dot-' + current).classList.remove('active');
+    }
+
+    function submitForm() {
+      document.getElementById('step-4').classList.remove('active');
+      document.getElementById('step-success').classList.add('active');
+      document.querySelector('.progress-bar').style.display = 'none';
+      window.scrollTo(0, 0);
+    }
+  </script>
+</body>
+</html>
