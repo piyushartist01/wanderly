@@ -1,0 +1,32 @@
+/* ===== WANDERLY HELP CENTRE STYLES (support.html) ===== */
+
+.faq-item {
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem 0;
+  cursor: pointer;
+}
+.faq-item:last-child {
+  border-bottom: none;
+}
+.faq-question {
+  font-weight: 600;
+  font-size: 1.125rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.faq-answer {
+  margin-top: 1rem;
+  color: var(--text-muted);
+  display: none;
+  line-height: 1.6;
+}
+.faq-item.active .faq-answer {
+  display: block;
+}
+.faq-item.active .faq-icon {
+  transform: rotate(180deg);
+}
+.faq-icon {
+  transition: transform 0.3s ease;
+}

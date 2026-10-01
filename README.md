@@ -83,10 +83,39 @@ wanderly/
 ├── contact.html            # Contact & inquiry form
 ├── support.html            # FAQ & offline pack guidance
 ├── css/
-│   └── style.css           # Complete design tokens, components & utilities
+│   ├── common.css          # Design tokens, reset, typography, navbar, footer, buttons, utilities
+│   ├── style.css           # Global stylesheet entry point (imports common.css)
+│   └── pages/              # Page-specific stylesheets
+│       ├── home.css
+│       ├── explore.css
+│       ├── destination.css
+│       ├── packages.css
+│       ├── package-detail.css
+│       ├── trip-builder.css
+│       ├── blog.css
+│       ├── post.css
+│       ├── about.css
+│       ├── contact.css
+│       ├── support.css
+│       ├── account.css
+│       └── login.css
 └── js/
-    ├── app.js              # Shared layout, navbar, auth, themes & wishlist
-    └── data.js             # Mock destinations, packages, reviews & stories
+    ├── data.js             # Centralized database (destinations, packages, stories)
+    ├── app.js              # Shared layout, navbar, auth, themes, wishlist, icons
+    └── pages/              # Page-specific logic scripts
+        ├── home.js
+        ├── explore.js
+        ├── destination.js
+        ├── packages.js
+        ├── package-detail.js
+        ├── trip-builder.js
+        ├── blog.js
+        ├── post.js
+        ├── about.js
+        ├── contact.js
+        ├── support.js
+        ├── account.js
+        └── login.js
 ```
 
 ---

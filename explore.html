@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Explore Destinations — Wanderly</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/pages/explore.css">
 </head>
 <body>
 
@@ -43,33 +44,6 @@
 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
-  <script>
-    initPage('explore');
-    
-    function renderGrid(data) {
-      const grid = document.getElementById('destinations-grid');
-      if (data.length === 0) {
-        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:4rem"><p class="text-muted">No destinations found matching your criteria.</p></div>';
-      } else {
-        grid.innerHTML = data.map(renderDestinationCard).join('');
-      }
-    }
-
-    function filterDestinations() {
-      const searchTerm = document.getElementById('search-input').value.toLowerCase();
-      const region = document.getElementById('region-filter').value;
-
-      const filtered = destinations.filter(d => {
-        const matchesSearch = d.name.toLowerCase().includes(searchTerm) || d.tagline.toLowerCase().includes(searchTerm);
-        const matchesRegion = region === 'All' || d.region === region;
-        return matchesSearch && matchesRegion;
-      });
-
-      renderGrid(filtered);
-    }
-
-    // Initialize
-    renderGrid(destinations);
-  </script>
+  <script src="js/pages/explore.js"></script>
 </body>
 </html>

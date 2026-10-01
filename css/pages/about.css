@@ -1,0 +1,9 @@
+/* ===== WANDERLY ABOUT PAGE STYLES (about.html) ===== */
+
+.about-hero {
+  text-align: center;
+  padding: 4rem 1rem;
+  background: var(--bg-surface);
+  border-radius: var(--radius-hero);
+  margin-bottom: 4rem;
+}

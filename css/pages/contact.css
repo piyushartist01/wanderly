@@ -1,0 +1,12 @@
+/* ===== WANDERLY CONTACT PAGE STYLES (contact.html) ===== */
+
+.contact-icon-bubble {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(14, 124, 134, 0.1);
+  color: var(--teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

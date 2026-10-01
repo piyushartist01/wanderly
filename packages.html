@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Explore Packages — Wanderly</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/pages/packages.css">
 </head>
 <body>
 
@@ -34,35 +35,6 @@
 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
-  <script>
-    initPage('packages');
-    
-    // Check URL for category
-    const urlParams = new URLSearchParams(window.location.search);
-    const initialCategory = urlParams.get('cat') || 'All';
-    
-    function renderGrid(data) {
-      const grid = document.getElementById('packages-grid');
-      grid.innerHTML = data.map(renderPackageCard).join('');
-    }
-
-    function filterCategory(cat, btnElement) {
-      // Update UI active state
-      document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-      if(btnElement) {
-        btnElement.classList.add('active');
-      } else {
-        // Find by text if called on load
-        Array.from(document.querySelectorAll('.chip')).find(el => el.textContent === cat)?.classList.add('active');
-      }
-
-      // Filter data
-      const filtered = cat === 'All' ? packages : packages.filter(p => p.category === cat);
-      renderGrid(filtered);
-    }
-
-    // Initialize
-    filterCategory(initialCategory);
-  </script>
+  <script src="js/pages/packages.js"></script>
 </body>
 </html>

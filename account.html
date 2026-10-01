@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>My Account — Wanderly</title>
   <meta name="description" content="Manage your bookings, wishlists and profile on Wanderly.">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/pages/account.css">
 </head>
 <body>
 
@@ -103,56 +104,6 @@
 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
-  <script>
-    initPage('account');
-
-    // Populate user profile
-    const user = getAuthUser();
-    if (user) {
-      document.getElementById('prof-name').textContent = user.name;
-      document.getElementById('prof-email').textContent = user.email;
-      document.getElementById('prof-avatar').textContent = user.avatar || user.name.charAt(0);
-      document.getElementById('prof-since').textContent = user.since || 'October 2026';
-      if (user.role) {
-        document.getElementById('prof-role').textContent = user.role;
-      }
-    } else {
-      document.getElementById('guest-state-banner').style.display = 'block';
-      document.getElementById('auth-header-action').innerHTML = `
-        <a href="login.html" class="btn btn-primary" style="border-radius:999px">Sign In</a>
-      `;
-      document.getElementById('prof-name').textContent = 'Guest Explorer';
-      document.getElementById('prof-email').textContent = 'Sign in to access your cloud profile';
-      document.getElementById('prof-avatar').textContent = 'GE';
-    }
-
-    function renderWishlist() {
-      const grid = document.getElementById('wishlist-grid');
-      const list = getWishlist();
-      document.getElementById('wishlist-counter').textContent = `${list.length} saved`;
-
-      if (list.length === 0) {
-        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;background:var(--card);border-radius:var(--radius-card);border:1.5px dashed var(--line)"><p class="text-muted" style="margin-bottom:12px">Your saved list is empty.</p><a href="packages.html" class="btn btn-primary" style="border-radius:999px">Explore Packages</a></div>';
-      } else {
-        const items = list.map(id => {
-           let item = packages.find(p => p.id === id);
-           if (item) return renderPackageCard(item);
-           item = destinations.find(d => d.id === id);
-           if (item) return renderDestinationCard(item);
-           return '';
-        });
-        grid.innerHTML = items.join('');
-      }
-    }
-
-    renderWishlist();
-
-    // Override toggleWishlist to refresh grid
-    const origToggle = toggleWishlist;
-    window.toggleWishlist = function(id) {
-       origToggle(id);
-       renderWishlist();
-    };
-  </script>
+  <script src="js/pages/account.js"></script>
 </body>
 </html>
